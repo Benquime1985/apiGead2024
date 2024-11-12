@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PositionCollection;
+use App\Http\Responses\ApiResponse;
 use App\Models\Position;
+use Exception;
 use Illuminate\Http\Request;
 
 class PositionController extends Controller
@@ -12,7 +15,12 @@ class PositionController extends Controller
      */
     public function index()
     {
-        //
+        try{
+            $positions = new PositionCollection(Position::all());
+            return ApiResponse::success('Listado De Puestos',201,$positions);
+        } catch (Exception $e){
+            return ApiResponse::error($e->getMessage(),500);
+        }
     }
 
     /**

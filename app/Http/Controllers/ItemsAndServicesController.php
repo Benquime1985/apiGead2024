@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ItemsAndServicesCollection;
+use App\Http\Responses\ApiResponse;
 use App\Models\ItemsAndServices;
+use Exception;
 use Illuminate\Http\Request;
 
 class ItemsAndServicesController extends Controller
@@ -12,7 +15,12 @@ class ItemsAndServicesController extends Controller
      */
     public function index()
     {
-        //
+        try{
+            $offerings = new ItemsAndServicesCollection(ItemsAndServices::all());
+            return ApiResponse::success('Listado De Servicos e Insumos',201,$offerings);
+        } catch (Exception $e){
+            return ApiResponse::error($e->getMessage(),500);
+        }
     }
 
     /**

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ReservationCollection;
+use App\Http\Responses\ApiResponse;
 use App\Models\Reservation;
+use Exception;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -12,7 +15,22 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        try{
+            $reservations = new ReservationCollection(Reservation::all());
+            return ApiResponse::success('Listado De las Reservaciones',201,$reservations);
+        } catch (Exception $e){
+            return ApiResponse::error($e->getMessage(),500);
+        }
+    }
+
+    public function details($id)
+    {
+        try {
+            $reservation = Reservation::with('itemsandservices', 'equipments')->findOrFail($id);
+            return ApiResponse::success('Detalles de la Reserva', 200, $reservation);
+        } catch (Exception $e) {
+            return ApiResponse::error($e->getMessage(), 500);
+        }
     }
 
     /**

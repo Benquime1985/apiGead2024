@@ -14,7 +14,6 @@ class ItemsAndServices extends Model
     //? Obtiene las reservaciones que pertenecen al item o servicio.
     public function reservations(){
         return $this->belongsToMany(Reservation::class, 'reservation_items_and_services')
-                    ->withPivot('quantity')
                     ->withTimestamps();
     }
 }

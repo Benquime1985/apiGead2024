@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\SpaceCollection;
+use App\Http\Resources\UserCollection;
 use App\Http\Responses\ApiResponse;
-use App\Models\Space;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 
-class SpaceController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class SpaceController extends Controller
     public function index()
     {
         try{
-            $spaces = new SpaceCollection(Space::all());
-            return ApiResponse::success('Listado De los Espacios',201,$spaces);
+            $users = new UserCollection(User::all());
+            return ApiResponse::success('Listado de usuarios',201,$users);
         } catch (Exception $e){
             return ApiResponse::error($e->getMessage(),500);
         }
@@ -34,7 +34,7 @@ class SpaceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Space $space)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +42,7 @@ class SpaceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Space $space)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -50,7 +50,7 @@ class SpaceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Space $space)
+    public function destroy(string $id)
     {
         //
     }

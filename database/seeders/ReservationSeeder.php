@@ -16,7 +16,7 @@ class ReservationSeeder extends Seeder
     {
         //! Paso 1: Crear Tablas Temporales
         DB::statement("CREATE TEMPORARY TABLE temp_items_and_services (reservation_id INT, items_and_service_id INT)");
-        DB::statement("CREATE TEMPORARY TABLE temp_equipments (reservation_id INT, equipment_id INT)");
+        DB::statement("CREATE TEMPORARY TABLE temp_equipment (reservation_id INT, equipment_id INT)");
 
         //! Paso 2: Crear datos base para las reservaciones
         $reservationData = [
@@ -59,7 +59,7 @@ class ReservationSeeder extends Seeder
                 ['reservation_id' => $reservationId, 'items_and_service_id' => 2],
             ]);
 
-            DB::table('temp_equipments')->insert([
+            DB::table('temp_equipment')->insert([
                 ['reservation_id' => $reservationId, 'equipment_id' => 1],
                 ['reservation_id' => $reservationId, 'equipment_id' => 2],
             ]);
@@ -73,7 +73,7 @@ class ReservationSeeder extends Seeder
             ]);
         });
 
-        DB::table('temp_equipments')->get()->each(function ($temp) {
+        DB::table('temp_equipment')->get()->each(function ($temp) {
             DB::table('reservation_equipment')->insert([
                 'reservation_id' => $temp->reservation_id,
                 'equipment_id' => $temp->equipment_id,

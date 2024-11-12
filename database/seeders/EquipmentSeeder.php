@@ -14,7 +14,7 @@ class EquipmentSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('equipments')->insert(
+        DB::table('equipment')->insert(
             [
                 'name' => 'Bocinas',
                 'created_at' => Carbon::now(),
@@ -22,7 +22,7 @@ class EquipmentSeeder extends Seeder
             ]
         );
 
-        DB::table('equipments')->insert(
+        DB::table('equipment')->insert(
             [
                 'name' => 'Laptops',
                 'created_at' => Carbon::now(),
@@ -30,7 +30,7 @@ class EquipmentSeeder extends Seeder
             ]
         );
 
-        DB::table('equipments')->insert(
+        DB::table('equipment')->insert(
             [
                 'name' => 'Proyector',
                 'created_at' => Carbon::now(),

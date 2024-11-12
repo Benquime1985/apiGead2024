@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\EquipmentCollection;
+use App\Http\Responses\ApiResponse;
 use App\Models\Equipment;
+use Exception;
 use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
@@ -12,7 +15,12 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        //
+        try{
+            $equipments = new EquipmentCollection(Equipment::all());
+            return ApiResponse::success('Listado De Servicos e Insumos',201,$equipments);
+        } catch (Exception $e){
+            return ApiResponse::error($e->getMessage(),500);
+        }
     }
 
     /**
@@ -20,7 +28,7 @@ class EquipmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

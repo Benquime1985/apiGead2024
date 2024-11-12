@@ -29,6 +29,7 @@ return new class extends Migration
                     ->on('items_and_services')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

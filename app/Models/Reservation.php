@@ -32,15 +32,12 @@ class Reservation extends Model
     }
 
     //? Obtiene los items y servicios que pertenecen a la reservación.
-    public function itemsAndServices(){
-        return $this->belongsToMany(ItemsAndServices::class, 'reservation_items_and_services')
-                    ->withPivot('quantity')
-                    ->withTimestamps();
-    }
+public function itemsAndServices(){
+    return $this->belongsToMany(ItemsAndServices::class, 'reservation_items_and_services', 'reservation_id', 'item_and_service_id');
+}
 
     //? Obtiene los equipos que pertenecen a la reservación.
     public function equipments(){
-        return $this->belongsToMany(Equipment::class, 'reservation_equipment')
-                    ->withTimestamps();
+        return $this->belongsToMany(Equipment::class, 'reservation_equipment');
     }
 }
