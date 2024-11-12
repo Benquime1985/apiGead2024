@@ -46,4 +46,21 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //? Un usuario tiene un rol
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
+
+    //? Un usuario tiene un puesto
+    public function position(){
+        return $this->belongsTo(Position::class);
+    }
+
+    
+    //? Un usuario tiene muchas reservas
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }
