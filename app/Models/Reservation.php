@@ -19,6 +19,8 @@ class Reservation extends Model
         'uploaded_job',
         'reservation_details',
         'requisition_number',
+        'equipment',
+        'items_and_services'
     ];
 
     //? Una reserva pertenece a un usuario

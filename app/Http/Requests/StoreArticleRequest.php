@@ -2,8 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Responses\ApiResponse;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Validator;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreArticleRequest extends FormRequest
 {
@@ -26,9 +29,16 @@ class StoreArticleRequest extends FormRequest
             'name' => 'required|min:3|max:64',
             'email' => 'required|unique:users|email|min:8|max:64',
             'password' => 'required|min:4|max:64',
-            'rol_id'=>'required',
+            'role_id'=>'required',
             'position_id'=>'required',
         ];    
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $errors = (new ValidationException($validator))->errors();
+        throw new HttpResponseException(ApiResponse::error('Ocurrieron Errores',404, $errors));
+        parent::failedValidation($validator);
     }
 
 }
